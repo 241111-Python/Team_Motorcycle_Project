@@ -1,4 +1,5 @@
-
+import sys # Importing the sys module to use sys.exit()
+import time
 user_path = input("enter path to data file: ")
 
 run = True
@@ -23,3 +24,6 @@ while(run) :
         run = False
     else : 
         print("invalid selection")
+
+time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).
+sys.exit(0) # Command to quit the program from the sys library (on the sys object created when the program runs) and raises the SystemExit exception. The "0" indicates a successful termination (no errors).
