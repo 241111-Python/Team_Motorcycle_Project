@@ -10,7 +10,8 @@ while(run) :
         print(''' list of options: 
                 1 - option 1 
                 2 - option 2 
-                3 - option 3 ''')
+                3 - option 3 
+                4 - quit ''') # Added the quit option to display.
     elif selection == "1" : 
         print("opiton 1")
     elif selection == "2" : 
