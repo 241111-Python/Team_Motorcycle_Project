@@ -1,6 +1,29 @@
 import sys # Importing the sys module to use sys.exit()
 import time
+import csv
+import json
 user_path = input("enter path to data file: ")
+
+def read_file():
+    #code to read file 
+    while True:
+        user_path = input("enter path to file (csv/json): ").strip()
+
+        try:
+            if user_path.endswith('.csv'):
+                with open(user_path, 'r') as file:
+                    reader = csv.DictReader(file)
+                    data = [row for row in reader]
+                return data
+            elif user_path.endswith('.json'):
+                with open(user_path, 'r') as file:
+                    data = json.load(file)
+                return data
+            else:
+                print("Incorrect file type. File must be a csv or json file.")
+        except Exception:
+            print(f"Error reading the file: {Exception}. Please try again.")
+    
 
 run = True
 
