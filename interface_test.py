@@ -14,10 +14,12 @@ def read_file():
                 with open(user_path, 'r') as file:
                     reader = csv.DictReader(file)
                     data = [row for row in reader]
+                    print(data) #Added functionality to print the data
                 return data
             elif user_path.endswith('.json'):
                 with open(user_path, 'r') as file:
                     data = json.load(file)
+                    print(data) #Added functionality to print the data
                 return data
             else:
                 print("Incorrect file type. File must be a csv or json file.")
@@ -37,7 +39,8 @@ while(run) :
                 3 - option 3 
                 4 - quit ''') # Added the quit option to display.
     elif selection == "1" : 
-        print("opiton 1")
+        print("opiton 1: Read file ") # Changed option 1 to read file to test reading CSVs
+        read_file()
     elif selection == "2" : 
         print("option 2")
     elif selection == "3" : 
