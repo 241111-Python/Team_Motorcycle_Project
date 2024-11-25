@@ -143,7 +143,7 @@ while(run) :
     selection = input("Enter selection: ")
     if selection == 'h' : 
         print(''' list of options: 
-                1 - List All Pokemons
+                1 - List All Pokemon
                 2 - List Individual Pokemon
                 3 - Choose Six Pokemon Team 
                 4 - Choose Random Pokemon Team
