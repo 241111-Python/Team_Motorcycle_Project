@@ -2,7 +2,7 @@
 additional sources: 
 https://betterdatascience.com/radar-charts-matplotlib-plotly/
 
-TO DO : 
+TO DO : save the current team to a csv file with timestamp, or save a random team 
 """
 
 import sys # Importing the sys module to use sys.exit()
