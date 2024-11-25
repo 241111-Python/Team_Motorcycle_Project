@@ -202,6 +202,7 @@ while(run) :
                 print("Team has not been chosen.")
         except NameError:
             print("Team has not been chosen.")
+            
     elif selection == "7" : 
         # save current or random team to csv file 
         try:
