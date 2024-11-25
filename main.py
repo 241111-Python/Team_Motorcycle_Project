@@ -204,7 +204,7 @@ while(run) :
             print("Team has not been chosen.")
             
     elif selection == "7" : 
-        # save current or random team to csv file 
+        # save current team to csv file 
         try:
             if team: 
                 print("Saving to file poketeams.csv ")
