@@ -15,8 +15,7 @@ import matplotlib.pyplot as plt
 import argparse
 import function_library as lib
 
-# maybe unneccecary
-# lib.read_file()
+team = ()
 
 run = True
 

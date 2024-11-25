@@ -62,6 +62,7 @@ def read_file(user_path):
             print(f"Error reading the file: {Exception}. Please try again.")
       
 def choose_pokemon_team_by_name():
+    data = read_file(user_path)
     if data:
         team = pokemon_team(data)
         print("\nYour Chosen Pokemon Team:")
@@ -71,6 +72,7 @@ def choose_pokemon_team_by_name():
             print("Data Unavailable")
 
 def generate_random_pokemon_team():
+    data = read_file(user_path)
     if data:
         team = random_team(data)
         print("\nYour Random Team:")
@@ -189,6 +191,7 @@ def radar_chart(stats):
    
 
 def autorun_stat_analyzer_with_random_team():
+    data = read_file(user_path)
     run = True
     regex_to_match = r"0-9"
     while(run):
@@ -198,8 +201,8 @@ def autorun_stat_analyzer_with_random_team():
 
             stats_for_all_runs = {}
             for i in range(iterations):
-                random_team(data)
-                analyzer_results = team_statanalyzer(team)
+                random_team = random_team(data)
+                analyzer_results = team_statanalyzer(random_team)
                 greatest_stat = max(analyzer_results)
                 least_stat = min(analyzer_results)
                 stats_for_all_runs.append(greatest_stat, least_stat)
