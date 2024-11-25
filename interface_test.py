@@ -3,6 +3,8 @@ import time
 import csv
 import json
 import random
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def read_file(user_path):
@@ -70,6 +72,33 @@ def pokemon_team(data):
 def random_team(data):
     return random.sample(data,6)
 
+def team_statanalyzer(team):
+    stats = {
+        "hp": 0,
+        "attack": 0,
+        "defense": 0,
+        "sp_attack": 0,
+        "sp_defense": 0,
+        "speed": 0,
+    }
+    
+    for pokemon in team:
+        for key in stats.keys():
+            stats[key] += pokemon.get(key, 0)  
+
+    # Calculate the average stats
+    average_stats = {key: value / len(team) for key, value in stats.items()}
+
+    print("Average Stats Analysis:")
+    for stat, avg in average_stats.items():
+        print(f"{stat.capitalize()}: {avg:.2f}")
+    radar_chart(average_stats)
+    return average_stats
+
+def radar_chart(stats):
+   return ""
+
+
 run = True
 
 while(run) : 
@@ -118,11 +147,15 @@ while(run) :
     elif selection == '8' or selection == 'q' : 
         print("quitting")
         run = False
-    elif selection == "5" : 
-        print("opiton 1: Read file ") # Changed option 1 to read file to test reading CSVs
-       
-    else : 
-        print("invalid selection")
+    elif selection == "6" : 
+        try:
+            if team: 
+                averages = team_statanalyzer(team)
+                
+            else:
+                print("Team has not been chosen.")
+        except NameError:
+            print("Team has not been chosen.")
 
 time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).
 sys.exit(0) # Command to quit the program from the sys library (on the sys object created when the program runs) and raises the SystemExit exception. The "0" indicates a successful termination (no errors).
