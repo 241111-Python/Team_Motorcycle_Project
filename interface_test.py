@@ -1,6 +1,8 @@
 """
 additional sources: 
 https://betterdatascience.com/radar-charts-matplotlib-plotly/
+
+TO DO : 
 """
 
 import sys # Importing the sys module to use sys.exit()
@@ -145,16 +147,21 @@ while(run) :
                 2 - List Individual Pokemon
                 3 - Choose Six Pokemon Team 
                 4 - Choose Random Pokemon Team
+                5 - show current team 
+                6 - show team analysis
                 8 - quit ''') # Added the quit option to display.
     elif selection == "1" : 
-        # list all pokemons
+        # list all pokemon 
         if data:
-            print(data) #Added functionality to print the data  
+            for pokemon in data : 
+                print(pokemon['name'])
     elif selection == "2" :
+        # show pokemon stats by search 
         if data:
             name = input("Enter Pokemon's name: ")
             individual_entry(data, name)
     elif selection == "3" : 
+        # choose pokemon team by name 
         if data:
                 team = pokemon_team(data)
                 print("\nYour Chosen Pokemon Team:")
@@ -163,6 +170,7 @@ while(run) :
         else:
             print("Data Unavailable")
     elif selection == "4" : 
+        # random pokemon team 
         if data:
                 team = random_team(data)
                 print("\nYour Random Team:")
@@ -171,6 +179,7 @@ while(run) :
         else:
             print("Data Unavailable")
     elif selection == "5" :
+        # show current team 
         try:
             if team:
                 for i, pokemon in enumerate(team,1):
@@ -178,9 +187,11 @@ while(run) :
         except(NameError):
             print("Team has not been chosen ")
     elif selection == '8' or selection == 'q' : 
+        # quit program 
         print("quitting")
         run = False
     elif selection == "6" : 
+        # team analysis with chart 
         try:
             if team: 
                 averages = team_statanalyzer(team)
