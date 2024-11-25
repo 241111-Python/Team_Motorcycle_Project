@@ -1,10 +1,3 @@
-"""
-this is a program to create your own pokemon team and analyze it's strength! 
-additional sources: 
-https://betterdatascience.com/radar-charts-matplotlib-plotly/
-
-"""
-
 import sys # Importing the sys module to use sys.exit()
 import time
 import csv
@@ -12,7 +5,6 @@ import json
 import random
 import numpy as np
 import matplotlib.pyplot as plt
-import argparse
 
 
 def read_file(user_path):
@@ -104,40 +96,13 @@ def team_statanalyzer(team):
     return average_stats
 
 def radar_chart(stats):
-    labels = list(stats.keys())
-    values = list(stats.values())
-    
-    labels = [*labels, labels[0]]
-    values = [*values, values[0]]
-
-
-    label_loc = np.linspace(start=0, stop=2 * np.pi, num=len(values))
-
-    plt.figure(figsize=(6, 6))
-    plt.subplot(polar=True)
-    plt.plot(label_loc, values, label='Team Stats')
-    plt.title('Team Stats Radar Chart', size=20, y=1.05)
-    labels = plt.thetagrids(np.degrees(label_loc), labels=labels)
-    plt.legend()
-    plt.show()
-
-
+   return ""
 
 
 run = True
 
 while(run) : 
-    #set argparser
-    parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
-    parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
-    args = parser.parse_args()
-
-    if args.file:
-        user_path = args.file
-    else:
-        user_path = "./all_CSVs/mainpoke/pokemon.csv"
-
-    
+    user_path  ="./all_CSVs/mainpoke/pokemon.csv"
     data = read_file(user_path)
     print("press h for list of options ")
     selection = input("Enter selection: ")
@@ -147,25 +112,19 @@ while(run) :
                 2 - List Individual Pokemon
                 3 - Choose Six Pokemon Team 
                 4 - Choose Random Pokemon Team
-                5 - show current team 
-                6 - show team analysis
-                7 - save team to poketeams.csv
+                5 -
+                6 - 
+                7 - 
                 8 - quit ''') # Added the quit option to display.
-        
     elif selection == "1" : 
-        # list all pokemon 
+        # list all pokemon
         if data:
-            for pokemon in data : 
-                print(pokemon['name'])
-
+            print(data) #Added functionality to print the data  
     elif selection == "2" :
-        # show pokemon stats by search 
         if data:
             name = input("Enter Pokemon's name: ")
             individual_entry(data, name)
-
     elif selection == "3" : 
-        # choose pokemon team by name 
         if data:
                 team = pokemon_team(data)
                 print("\nYour Chosen Pokemon Team:")
@@ -173,9 +132,7 @@ while(run) :
                     print(f"{i}. {pokemon['name']}")
         else:
             print("Data Unavailable")
-
     elif selection == "4" : 
-        # random pokemon team n
         if data:
                 team = random_team(data)
                 print("\nYour Random Team:")
@@ -183,49 +140,25 @@ while(run) :
                     print(f"{i}. {pokemon['name']}")
         else:
             print("Data Unavailable")
-
     elif selection == "5" :
-        # show current team 
         try:
             if team:
                 for i, pokemon in enumerate(team,1):
                     print(f"{i}. {pokemon['name']}")
         except(NameError):
             print("Team has not been chosen ")
-
+    elif selection == '8' or selection == 'q' : 
+        print("quitting")
+        run = False
     elif selection == "6" : 
-        # team analysis with chart 
         try:
             if team: 
                 averages = team_statanalyzer(team)
+                
             else:
                 print("Team has not been chosen.")
         except NameError:
             print("Team has not been chosen.")
-            
-    elif selection == "7" : 
-        # save current team to csv file 
-        try:
-            if team: 
-                print("Saving to file poketeams.csv ")
-                with open('./all_CSVs/poketeams.csv', 'a', newline='') as teamfile : 
-                    fieldnames = ['name', 'types', 'hp', 'attack', 'defense', 
-                                  'sp_attack', 'sp_defense', 'speed']
-                    writer = csv.DictWriter(teamfile, fieldnames = fieldnames)
-                    writer.writeheader
-                    writer.writerow({})
-                    writer.writerows(team) 
-
-            else:
-                print("Team has not been chosen.")
-        except NameError:
-            print("Team has not been chosen.")
-
-
-    elif selection == '8' or selection == 'q' : 
-        # quit program 
-        print("quitting")
-        run = False
 
 time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).
 sys.exit(0) # Command to quit the program from the sys library (on the sys object created when the program runs) and raises the SystemExit exception. The "0" indicates a successful termination (no errors).
