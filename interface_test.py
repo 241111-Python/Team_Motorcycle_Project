@@ -149,17 +149,21 @@ while(run) :
                 4 - Choose Random Pokemon Team
                 5 - show current team 
                 6 - show team analysis
+                7 - save team to poketeams.csv
                 8 - quit ''') # Added the quit option to display.
+        
     elif selection == "1" : 
         # list all pokemon 
         if data:
             for pokemon in data : 
                 print(pokemon['name'])
+
     elif selection == "2" :
         # show pokemon stats by search 
         if data:
             name = input("Enter Pokemon's name: ")
             individual_entry(data, name)
+
     elif selection == "3" : 
         # choose pokemon team by name 
         if data:
@@ -169,6 +173,7 @@ while(run) :
                     print(f"{i}. {pokemon['name']}")
         else:
             print("Data Unavailable")
+
     elif selection == "4" : 
         # random pokemon team 
         if data:
@@ -178,6 +183,7 @@ while(run) :
                     print(f"{i}. {pokemon['name']}")
         else:
             print("Data Unavailable")
+
     elif selection == "5" :
         # show current team 
         try:
@@ -186,10 +192,7 @@ while(run) :
                     print(f"{i}. {pokemon['name']}")
         except(NameError):
             print("Team has not been chosen ")
-    elif selection == '8' or selection == 'q' : 
-        # quit program 
-        print("quitting")
-        run = False
+
     elif selection == "6" : 
         # team analysis with chart 
         try:
@@ -199,6 +202,29 @@ while(run) :
                 print("Team has not been chosen.")
         except NameError:
             print("Team has not been chosen.")
+    elif selection == "7" : 
+        # save current or random team to csv file 
+        try:
+            if team: 
+                print("Saving to file poketeams.csv ")
+                with open('./all_CSVs/poketeams.csv', 'a', newline='') as teamfile : 
+                    fieldnames = ['name', 'types', 'hp', 'attack', 'defense', 
+                                  'sp_attack', 'sp_defense', 'speed']
+                    writer = csv.DictWriter(teamfile, fieldnames = fieldnames)
+                    writer.writeheader
+                    writer.writerow({})
+                    writer.writerows(team) 
+
+            else:
+                print("Team has not been chosen.")
+        except NameError:
+            print("Team has not been chosen.")
+
+
+    elif selection == '8' or selection == 'q' : 
+        # quit program 
+        print("quitting")
+        run = False
 
 time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).
 sys.exit(0) # Command to quit the program from the sys library (on the sys object created when the program runs) and raises the SystemExit exception. The "0" indicates a successful termination (no errors).
