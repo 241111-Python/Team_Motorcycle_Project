@@ -5,6 +5,7 @@ import json
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+import argparse
 
 
 def read_file(user_path):
@@ -96,13 +97,40 @@ def team_statanalyzer(team):
     return average_stats
 
 def radar_chart(stats):
-   return ""
+    labels = list(stats.keys())
+    values = list(stats.values())
+    
+    labels = [*labels, labels[0]]
+    values = [*values, values[0]]
+
+
+    label_loc = np.linspace(start=0, stop=2 * np.pi, num=len(values))
+
+    plt.figure(figsize=(6, 6))
+    plt.subplot(polar=True)
+    plt.plot(label_loc, values, label='Team Stats')
+    plt.title('Team Stats Radar Chart', size=20, y=1.05)
+    labels = plt.thetagrids(np.degrees(label_loc), labels=labels)
+    plt.legend()
+    plt.show()
+
+
 
 
 run = True
 
 while(run) : 
-    user_path  ="./all_CSVs/mainpoke/pokemon.csv"
+    #set argparser
+    parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
+    parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
+    args = parser.parse_args()
+
+    if args.file:
+        user_path = args.file
+    else:
+        user_path = "./all_CSVs/mainpoke/pokemon.csv"
+
+    
     data = read_file(user_path)
     print("press h for list of options ")
     selection = input("Enter selection: ")
@@ -151,7 +179,6 @@ while(run) :
         try:
             if team: 
                 averages = team_statanalyzer(team)
-                
             else:
                 print("Team has not been chosen.")
         except NameError:
