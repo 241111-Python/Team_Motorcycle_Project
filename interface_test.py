@@ -1,3 +1,8 @@
+"""
+additional sources: 
+https://betterdatascience.com/radar-charts-matplotlib-plotly/
+"""
+
 import sys # Importing the sys module to use sys.exit()
 import time
 import csv
