@@ -78,6 +78,8 @@ def generate_random_pokemon_team():
         print("\nYour Random Team:")
         for i, pokemon in enumerate(team,1):
             print(f"{i}. {pokemon['name']}")
+        return team
+
     else:
         print("Data Unavailable")
 
@@ -130,20 +132,21 @@ def individual_entry(data, name):
     else:
         print(f"No Pokémon found with name '{name}'.")
 
-def pokemon_team(data):
-    poke_team = []
+def pokemon_team():
+    data = read_file(user_path)
+    team = []
     val=0
     while(val < 6):
         user_input = input("choose pokemon to be added: ")
         for poke in data:
             if poke["name"].lower() == user_input.lower():
-                poke_team.append(poke)
+                team.append(poke)
                 val+=1
                 print("Pokemon successfully added to team")
                 break
           
 
-    return poke_team
+    return team
 
 def random_team(data):
     return random.sample(data,6)

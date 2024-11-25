@@ -16,6 +16,7 @@ import argparse
 import function_library as lib
 
 team = ()
+team = []
 
 run = True
 
@@ -58,12 +59,14 @@ while(run) :
 
     elif selection == "3" : 
         # choose pokemon team by name 
-        lib.choose_pokemon_team_by_name()
+        # team = lib.choose_pokemon_team_by_name()
+        team = lib.pokemon_team()
             
 
     elif selection == "4" : 
         # generate random pokemon team
-        lib.generate_random_pokemon_team()
+        team = lib.generate_random_pokemon_team()
+        
 
     elif selection == "5" :
         # show current team 
