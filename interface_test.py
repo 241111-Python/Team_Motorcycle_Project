@@ -75,7 +75,6 @@ run = True
 while(run) : 
     user_path  ="./all_CSVs/mainpoke/pokemon.csv"
     data = read_file(user_path)
-    
     print("press h for list of options ")
     selection = input("Enter selection: ")
     if selection == 'h' : 
@@ -109,6 +108,13 @@ while(run) :
                     print(f"{i}. {pokemon['name']}")
         else:
             print("Data Unavailable")
+    elif selection == "5" :
+        try:
+            if team:
+                for i, pokemon in enumerate(team,1):
+                    print(f"{i}. {pokemon['name']}")
+        except(NameError):
+            print("Team has not been chosen ")
     elif selection == '8' or selection == 'q' : 
         print("quitting")
         run = False
