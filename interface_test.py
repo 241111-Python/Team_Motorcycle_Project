@@ -2,6 +2,7 @@ import sys # Importing the sys module to use sys.exit()
 import time
 import csv
 import json
+import random
 
 
 def read_file(user_path):
@@ -50,7 +51,24 @@ def individual_entry(data, name):
         return
     else:
         print(f"No Pokémon found with name '{name}'.")
-    
+
+def pokemon_team(data):
+    poke_team = []
+    val=0
+    while(val < 6):
+        user_input = input("choose pokemon to be added: ")
+        for poke in data:
+            if poke["name"].lower() == user_input.lower():
+                poke_team.append(poke)
+                val+=1
+                print("Pokemon successfully added to team")
+                break
+          
+
+    return poke_team
+
+def random_team(data):
+    return random.sample(data,6)
 
 run = True
 
@@ -62,10 +80,11 @@ while(run) :
     selection = input("Enter selection: ")
     if selection == 'h' : 
         print(''' list of options: 
-                1 - List all Pokemons
+                1 - List All Pokemons
                 2 - List Individual Pokemon
-                3 - option 3 
-                4 - quit ''') # Added the quit option to display.
+                3 - Choose Six Pokemon Team 
+                4 - Choose Random Pokemon Team
+                8 - quit ''') # Added the quit option to display.
     elif selection == "1" : 
         # list all pokemons
         if data:
@@ -75,8 +94,22 @@ while(run) :
             name = input("Enter Pokemon's name: ")
             individual_entry(data, name)
     elif selection == "3" : 
-        print(user_path)
-    elif selection == '4' or selection == 'q' : 
+        if data:
+                team = pokemon_team(data)
+                print("\nYour Chosen Pokemon Team:")
+                for i, pokemon in enumerate(team,1):
+                    print(f"{i}. {pokemon['name']}")
+        else:
+            print("Data Unavailable")
+    elif selection == "4" : 
+        if data:
+                team = random_team(data)
+                print("\nYour Random Team:")
+                for i, pokemon in enumerate(team,1):
+                    print(f"{i}. {pokemon['name']}")
+        else:
+            print("Data Unavailable")
+    elif selection == '8' or selection == 'q' : 
         print("quitting")
         run = False
     elif selection == "5" : 
