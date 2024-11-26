@@ -1,3 +1,4 @@
+import re
 import sys # Importing the sys module to use sys.exit()
 import time
 import csv
@@ -5,7 +6,30 @@ import json
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+import argparse
 
+parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
+parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
+args = parser.parse_args()
+
+global team
+
+if args.file:
+        user_path = args.file
+else:
+    user_path = "./all_CSVs/mainpoke/pokemon.csv"
+
+def list_all_pokemon():
+    data = read_file(user_path)
+    if data:
+        for pokemon in data : 
+            print(pokemon['name'])
+
+def show_pokemon_stats_by_search():
+    data = read_file(user_path)
+    if data:
+        name = input("Enter Pokemon's name: ")
+        individual_entry(data, name)
 
 def read_file(user_path):
     #code to read file 
@@ -39,7 +63,63 @@ def read_file(user_path):
         except Exception:
             print(f"Error reading the file: {Exception}. Please try again.")
       
+def choose_pokemon_team_by_name():
+    data = read_file(user_path)
+    if data:
+        team = pokemon_team(data)
+        print("\nYour Chosen Pokemon Team:")
+        for i, pokemon in enumerate(team,1):
+            print(f"{i}. {pokemon['name']}")
+        else:
+            print("Data Unavailable")
 
+def generate_random_pokemon_team():
+    data = read_file(user_path)
+    if data:
+        team = random_team(data)
+        print("\nYour Random Team:")
+        for i, pokemon in enumerate(team,1):
+            print(f"{i}. {pokemon['name']}")
+        return team
+
+    else:
+        print("Data Unavailable")
+
+def show_current_team():
+    try:
+        if team:
+            for i, pokemon in enumerate(team,1):
+                print(f"{i}. {pokemon['name']}")
+    except(NameError):
+        print("Team has not been chosen ")    
+
+def analyze_team(): 
+    try:
+        if team: 
+            averages = team_statanalyzer(team)
+        else:
+            print("Team has not been chosen.")
+    except NameError:
+        print("Team has not been chosen.")      
+
+def save_team():   
+    try:
+        if team: 
+            print("Saving to file poketeams.csv ")
+            with open('./all_CSVs/poketeams.csv', 'a', newline='') as teamfile : 
+                fieldnames = ['name', 'types', 'hp', 'attack', 'defense', 
+                                'sp_attack', 'sp_defense', 'speed']
+                writer = csv.DictWriter(teamfile, fieldnames = fieldnames)
+                writer.writeheader
+                writer.writerow({})
+                writer.writerows(team) 
+
+        else:
+            print("Team has not been chosen.")
+    except NameError:
+        print("Team has not been chosen.")
+
+            
 def individual_entry(data, name):
     track = 0
     for item in data:
@@ -54,20 +134,21 @@ def individual_entry(data, name):
     else:
         print(f"No Pokémon found with name '{name}'.")
 
-def pokemon_team(data):
-    poke_team = []
+def pokemon_team():
+    data = read_file(user_path)
+    team = []
     val=0
     while(val < 6):
         user_input = input("choose pokemon to be added: ")
         for poke in data:
             if poke["name"].lower() == user_input.lower():
-                poke_team.append(poke)
+                team.append(poke)
                 val+=1
                 print("Pokemon successfully added to team")
                 break
           
 
-    return poke_team
+    return team
 
 def random_team(data):
     return random.sample(data,6)
@@ -96,69 +177,46 @@ def team_statanalyzer(team):
     return average_stats
 
 def radar_chart(stats):
-   return ""
+    labels = list(stats.keys())
+    values = list(stats.values())
+    
+    labels = [*labels, labels[0]]
+    values = [*values, values[0]]
 
 
-run = True
+    label_loc = np.linspace(start=0, stop=2 * np.pi, num=len(values))
 
-while(run) : 
-    user_path  ="./all_CSVs/mainpoke/pokemon.csv"
+    plt.figure(figsize=(6, 6))
+    plt.subplot(polar=True)
+    plt.plot(label_loc, values, label='Team Stats')
+    plt.title('Team Stats Radar Chart', size=20, y=1.05)
+    labels = plt.thetagrids(np.degrees(label_loc), labels=labels)
+    plt.legend()
+    plt.show()
+   
+
+def autorun_stat_analyzer_with_random_team():
     data = read_file(user_path)
-    print("press h for list of options ")
-    selection = input("Enter selection: ")
-    if selection == 'h' : 
-        print(''' list of options: 
-                1 - List All Pokemon
-                2 - List Individual Pokemon
-                3 - Choose Six Pokemon Team 
-                4 - Choose Random Pokemon Team
-                5 -
-                6 - 
-                7 - 
-                8 - quit ''') # Added the quit option to display.
-    elif selection == "1" : 
-        # list all pokemon
-        if data:
-            print(data) #Added functionality to print the data  
-    elif selection == "2" :
-        if data:
-            name = input("Enter Pokemon's name: ")
-            individual_entry(data, name)
-    elif selection == "3" : 
-        if data:
-                team = pokemon_team(data)
-                print("\nYour Chosen Pokemon Team:")
-                for i, pokemon in enumerate(team,1):
-                    print(f"{i}. {pokemon['name']}")
-        else:
-            print("Data Unavailable")
-    elif selection == "4" : 
-        if data:
-                team = random_team(data)
-                print("\nYour Random Team:")
-                for i, pokemon in enumerate(team,1):
-                    print(f"{i}. {pokemon['name']}")
-        else:
-            print("Data Unavailable")
-    elif selection == "5" :
-        try:
-            if team:
-                for i, pokemon in enumerate(team,1):
-                    print(f"{i}. {pokemon['name']}")
-        except(NameError):
-            print("Team has not been chosen ")
-    elif selection == '8' or selection == 'q' : 
-        print("quitting")
-        run = False
-    elif selection == "6" : 
-        try:
-            if team: 
-                averages = team_statanalyzer(team)
-                
-            else:
-                print("Team has not been chosen.")
-        except NameError:
-            print("Team has not been chosen.")
+    run = True
+    regex_to_match = r"0-9"
+    while(run):
+        iterations = input("How many iterations would you like to run? ")
+        if re.match(regex_to_match, iterations):
+            print("running stats on " + iterations + " iterations.")
 
-time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).
-sys.exit(0) # Command to quit the program from the sys library (on the sys object created when the program runs) and raises the SystemExit exception. The "0" indicates a successful termination (no errors).
+            stats_for_all_runs = {}
+            for i in range(iterations):
+                random_team = random_team(data)
+                analyzer_results = team_statanalyzer(random_team)
+                greatest_stat = max(analyzer_results)
+                least_stat = min(analyzer_results)
+                stats_for_all_runs.append(greatest_stat, least_stat)
+                
+                # on each run store minimum and maximum stat and names of.
+                # On end of iterations output the minimum and maximum stats for each stat.
+                
+            run = False
+
+            print(stats_for_all_runs)
+        else : 
+            print("Invalid input. Type a number. ")
