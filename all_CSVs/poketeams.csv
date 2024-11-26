@@ -19,3 +19,17 @@ Bellossom,"['Grass', '']",75,80,95,90,100,50
 Poliwag,"['Water', '']",40,50,40,40,40,90
 Staravia,"['Normal', 'Flying']",55,75,50,40,40,80
 Qwilfish,"['Water', 'Poison']",65,95,75,55,55,85
+
+Cyndaquil,"['Fire', '']",39,52,43,60,50,65
+Hitmontop,"['Fighting', '']",50,95,95,35,110,70
+Emboar,"['Fire', 'Fighting']",110,123,65,100,65,65
+Kakuna,"['Bug', 'Poison']",45,25,50,25,25,35
+Rhyperior,"['Ground', 'Rock']",115,140,130,55,55,40
+Florges,"['Fairy', '']",78,65,68,112,154,75
+
+Kirlia,"['Psychic', 'Fairy']",38,35,35,65,55,50
+Grovyle,"['Grass', '']",50,65,45,85,65,95
+Slowbro,"['Water', 'Psychic']",95,75,110,100,80,30
+Chimchar,"['Fire', '']",44,58,44,58,44,61
+Ivysaur,"['Grass', 'Poison']",60,62,63,80,80,60
+Tauros,"['Normal', '']",75,100,95,40,70,110
