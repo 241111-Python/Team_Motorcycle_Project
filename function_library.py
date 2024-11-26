@@ -110,11 +110,11 @@ def analyze_team():
     except NameError:
         print("Team has not been chosen.")      
 
-def save_team():   
+def save_team(path):   
     try:
         if team: 
-            with open('./all_CSVs/poketeams.csv', 'a', newline='') as teamfile : 
-                print("Saving to file poketeams.csv ")
+            with open(path, 'a', newline='') as teamfile : 
+                print("Saving to file " + path)
                 fieldnames = ['name', 'types', 'hp', 'attack', 'defense', 
                                 'sp_attack', 'sp_defense', 'speed']
                 writer = csv.DictWriter(teamfile, fieldnames = fieldnames)
@@ -320,6 +320,6 @@ else:
 if args.save_random_team:
     print("saving a random team to file...")
     team = generate_random_pokemon_team()
-    save_team()
+    save_team('all_CSVs/cronTeams.csv')
     time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).
     sys.exit(0) # Command to quit the program from the sys library (on the sys object created when the program runs) and raises the SystemExit exception. The "0" indicates a successful termination (no errors).

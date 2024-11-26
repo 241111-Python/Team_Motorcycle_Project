@@ -62,7 +62,7 @@ while(run) :
             
     elif selection == "7" : 
         # Saves current team to csv file.
-       lib.save_team()
+       lib.save_team('all_CSVs/poketeams.csv')
 
 
     elif selection == '8':
