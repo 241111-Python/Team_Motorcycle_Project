@@ -108,7 +108,9 @@ def show_current_team():
     except(NameError):
         print("Team has not been chosen ")    
 
-# Analyzes stored team's stats by taking the 
+# Leverages the team_statanalyzer to run and display analysys
+#  on stored team's stats.
+# (Used as option 6.)
 def analyze_team(): 
     global team
     try:
@@ -118,6 +120,7 @@ def analyze_team():
             print("Team has not been chosen.")
     except NameError:
         print("Team has not been chosen.")      
+
 
 def save_team():   
     try:
