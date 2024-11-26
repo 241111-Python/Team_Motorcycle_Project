@@ -7,20 +7,10 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
-import datetime as dt
-
-parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
-parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
-args = parser.parse_args()
 
 global team
 global user_path
 global data
-
-if args.file:
-    user_path = args.file
-else:
-    user_path = "./all_CSVs/mainpoke/pokemon.csv"
 
 
 def list_all_pokemon():
@@ -273,3 +263,20 @@ def autorun_stat_analyzer_with_random_team():
             print(stats_for_all_runs)
         else : 
             print("Invalid input. Type a number. ")
+
+parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
+parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
+parser.add_argument('--save_random_team', '-srt', action='store_true', help='generate random team, save team to file')
+args = parser.parse_args()
+
+if args.file:
+    user_path = args.file
+else:
+    user_path = "./all_CSVs/mainpoke/pokemon.csv"
+
+if args.save_random_team:
+    print("saving a random team to file...")
+    team = generate_random_pokemon_team()
+    save_team()
+    time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).
+    sys.exit(0) # Command to quit the program from the sys library (on the sys object created when the program runs) and raises the SystemExit exception. The "0" indicates a successful termination (no errors).
