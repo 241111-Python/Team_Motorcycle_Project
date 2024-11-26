@@ -31,7 +31,8 @@ while(run) :
 
     
     data = lib.read_file(user_path)
-    print("press h for list of options ")
+    print("""---------------------------------------------
+          press h for list of options """)
     selection = input("Enter selection: ")
     if selection == 'h' : 
         print(''' list of options: 
