@@ -21,17 +21,18 @@ run = True
 
 while(run) : 
     #set argparser
-    parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
-    parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
+    # parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
+    # args = parser.parse_args()
+    # global user_path
 
-    if args.file:
-        user_path = args.file
-    else:
-        user_path = "./all_CSVs/mainpoke/pokemon.csv"
+    # if args.file:
+    #     user_path = args.file
+    # else:
+    #     user_path = "./all_CSVs/mainpoke/pokemon.csv"
 
     
-    data = lib.read_file(user_path)
+    lib.data = lib.read_file(lib.user_path)
     print("""---------------------------------------------
           press h for list of options """)
     selection = input("Enter selection: ")
@@ -91,7 +92,7 @@ while(run) :
 
     elif selection == "9":
     # Filter Pokémon by type
-       lib.type_filter( data)
+       lib.type_filter(lib.data)
 
     elif selection == '10' : 
         # quit program 
@@ -102,9 +103,6 @@ while(run) :
         # quit program 
         print("quitting")
         run = False
-
-     
-   
         
 
 time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).

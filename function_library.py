@@ -14,11 +14,14 @@ parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data fi
 args = parser.parse_args()
 
 global team
+global user_path
+global data
 
 if args.file:
-        user_path = args.file
+    user_path = args.file
 else:
     user_path = "./all_CSVs/mainpoke/pokemon.csv"
+
 
 def list_all_pokemon():
     data = read_file(user_path)
@@ -106,7 +109,6 @@ def analyze_team():
         print("Team has not been chosen.")      
 
 def save_team():   
-    global team
     try:
         if team: 
             with open('./all_CSVs/poketeams.csv', 'a', newline='') as teamfile : 
