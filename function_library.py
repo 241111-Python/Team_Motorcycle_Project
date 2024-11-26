@@ -58,6 +58,7 @@ def read_file(user_path):
             print(f"Error reading the file: {Exception}. Please try again.")
       
 def choose_pokemon_team_by_name():
+    global team
     data = read_file(user_path)
     if data:
         team = pokemon_team(data)
@@ -68,6 +69,7 @@ def choose_pokemon_team_by_name():
             print("Data Unavailable")
 
 def generate_random_pokemon_team():
+    global team
     data = read_file(user_path)
     if data:
         team = random_team(data)
@@ -80,6 +82,7 @@ def generate_random_pokemon_team():
         print("Data Unavailable")
 
 def generate_random_pokemon_team_for_autorun():
+    global team
     data = read_file(user_path)
     if data:
         team = random_team(data)
@@ -88,7 +91,8 @@ def generate_random_pokemon_team_for_autorun():
     else:
         print("Data Unavailable")
 
-def show_current_team(team):
+def show_current_team():
+    global team
     try:
         if team:
             for i, pokemon in enumerate(team,1):
@@ -100,7 +104,7 @@ def analyze_team():
     global team
     try:
         if team: 
-            averages = team_statanalyzer(team)
+            averages = team_statanalyzer()
         else:
             print("Team has not been chosen.")
     except NameError:
@@ -158,7 +162,8 @@ def pokemon_team():
 def random_team(data):
     return random.sample(data,6)
 
-def team_statanalyzer(team):
+def team_statanalyzer():
+    global team
     stats = {
         "hp": 0,
         "attack": 0,
@@ -195,7 +200,8 @@ def team_statanalyzer(team):
 
 
 
-def team_statanalyzer_for_autorun(team):
+def team_statanalyzer_for_autorun():
+    global team
     stats = {
         "hp": 0,
         "attack": 0,
@@ -212,7 +218,7 @@ def team_statanalyzer_for_autorun(team):
     average_stats = {key: value / len(team) for key, value in stats.items()}
     return average_stats
 
-def radar_chart(stats):
+def radar_chart(stats, ratings):
     labels = list(stats.keys())
     values = list(stats.values())
     
@@ -278,7 +284,7 @@ def autorun_stat_analyzer_with_random_team():
             min_stats_for_all_runs = {}
             for i in range(iterations):
                 random_team = generate_random_pokemon_team_for_autorun()
-                analyzer_results = team_statanalyzer_for_autorun(random_team)
+                analyzer_results = team_statanalyzer_for_autorun()
                 max_key = max(analyzer_results, key=analyzer_results.get)
                 greatest_stat = analyzer_results[max_key]
                 min_key = min(analyzer_results, key=analyzer_results.get)
