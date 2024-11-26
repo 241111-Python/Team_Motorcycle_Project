@@ -13,7 +13,7 @@ import function_library as lib
 run = True
 
 while(run) :
-    
+    # Printing list of options to select from.
     lib.data = lib.read_file(lib.user_path)
     print("""---------------------------------------------
           press h for list of options """)
