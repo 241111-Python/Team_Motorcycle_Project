@@ -86,7 +86,8 @@ def generate_random_pokemon_team():
     else:
         print("Data Unavailable")
 
-def show_current_team(team):
+def show_current_team():
+    global team
     try:
         if team:
             for i, pokemon in enumerate(team,1):
@@ -94,7 +95,8 @@ def show_current_team(team):
     except(NameError):
         print("Team has not been chosen ")    
 
-def analyze_team(team): 
+def analyze_team(): 
+    global team
     try:
         if team: 
             averages = team_statanalyzer(team)
@@ -103,7 +105,8 @@ def analyze_team(team):
     except NameError:
         print("Team has not been chosen.")      
 
-def save_team(team):   
+def save_team():   
+    global team
     try:
         if team: 
             with open('./all_CSVs/poketeams.csv', 'a', newline='') as teamfile : 
@@ -171,14 +174,28 @@ def team_statanalyzer(team):
 
     # Calculate the average stats
     average_stats = {key: value / len(team) for key, value in stats.items()}
+    
+     # Define ratings
+    ratings = {}
+    for stat, avg in stats.items():
+        if avg <= 50:
+            ratings[stat] = "Poor"
+        elif 50 < avg <= 80:
+            ratings[stat] = "Mid"
+        else:
+            ratings[stat] = "Good"
+
 
     print("Average Stats Analysis:")
     for stat, avg in average_stats.items():
         print(f"{stat.capitalize()}: {avg:.2f}")
-    radar_chart(average_stats)
-    return average_stats
+    radar_chart(average_stats, ratings )
+    return average_stats, ratings
 
-def radar_chart(stats):
+
+
+
+def radar_chart(stats,ratings):
     labels = list(stats.keys())
     values = list(stats.values())
     
@@ -193,10 +210,13 @@ def radar_chart(stats):
     plt.plot(label_loc, values, label='Team Stats')
     plt.title('Team Stats Radar Chart', size=20, y=1.05)
     labels = plt.thetagrids(np.degrees(label_loc), labels=labels)
+    rating_text = "\n".join([f"{stat.capitalize()}: {rating}" for stat, rating in ratings.items()])
+    plt.figtext(0.5, 0.02, f"Ratings:\n{rating_text}", wrap=True, horizontalalignment="center", fontsize=12)
     plt.legend()
     plt.show()
 
-def type_filter(team, data):
+def type_filter(data):
+    global team
     if team:
         types = {t for p in team for t in p["types"] if t}  # Get all unique types
         print("Available Types:", ", ".join(types))
