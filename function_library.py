@@ -291,7 +291,7 @@ def autorun_stat_analyzer_with_random_team():
                 
             run = False
             highest_overall_stat = max(max_stats_for_all_runs.values())
-            lowest_overall_stat = max(min_stats_for_all_runs.values())
+            lowest_overall_stat = min(min_stats_for_all_runs.values())
             average_highest_stat=(sum(max_stats_for_all_runs.values()) // iterations)
             average_lowest_stat=(sum(min_stats_for_all_runs.values()) // iterations)
             print("The overall highest stat = " + str(highest_overall_stat))
