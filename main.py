@@ -72,26 +72,26 @@ while(run) :
 
     elif selection == "5" :
         # show current team 
-        lib.show_current_team(team)
+        lib.show_current_team(lib.team)
 
     elif selection == "6" : 
         # team analysis with chart 
-        lib.analyze_team(team)
+        lib.analyze_team(lib.team)
             
     elif selection == "7" : 
         # save current or random team to csv file 
-       lib.save_team(team)
+       lib.save_team(lib.team)
 
 
     elif selection == '8':
         # clear selected team 
         print("chosen team cleared")
-        team = []
+        lib.team = []
 
 
     elif selection == "9":
     # Filter Pokémon by type
-       lib.type_filter(team, data)
+       lib.type_filter(lib.team, data)
 
     elif selection == '10' : 
         # quit program 

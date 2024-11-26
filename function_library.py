@@ -7,6 +7,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
+import datetime as dt
 
 parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
 parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
@@ -105,13 +106,14 @@ def analyze_team(team):
 def save_team(team):   
     try:
         if team: 
-            print("Saving to file poketeams.csv ")
             with open('./all_CSVs/poketeams.csv', 'a', newline='') as teamfile : 
+                print("Saving to file poketeams.csv ")
                 fieldnames = ['name', 'types', 'hp', 'attack', 'defense', 
                                 'sp_attack', 'sp_defense', 'speed']
                 writer = csv.DictWriter(teamfile, fieldnames = fieldnames)
+                writer2 = csv.writer(teamfile)
+                writer2.writerow("")
                 writer.writeheader
-                writer.writerow({})
                 writer.writerows(team) 
 
         else:
