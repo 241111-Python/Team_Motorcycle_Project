@@ -2,35 +2,17 @@
 this is a program to create your own pokemon team and analyze it's strength! 
 additional sources: 
 https://betterdatascience.com/radar-charts-matplotlib-plotly/
+https://www.serebii.net/pokedex-sv/index.png
 
 """
-
-import sys # Importing the sys module to use sys.exit()
+# Importing all libraries and functions nececary for program function
+import sys
 import time
-# import csv
-# import json
-# import random
-import numpy as np
-import matplotlib.pyplot as plt
-import argparse
 import function_library as lib
-
-
 
 run = True
 
-while(run) : 
-    #set argparser
-    # parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
-    # parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
-    # args = parser.parse_args()
-    # global user_path
-
-    # if args.file:
-    #     user_path = args.file
-    # else:
-    #     user_path = "./all_CSVs/mainpoke/pokemon.csv"
-
+while(run) :
     
     lib.data = lib.read_file(lib.user_path)
     print("""---------------------------------------------
@@ -38,17 +20,17 @@ while(run) :
     selection = input("Enter selection: ")
     if selection == 'h' : 
         print(''' list of options: 
-                1 - List All Pokemon
-                2 - List Individual Pokemon
-                3 - Choose Six Pokemon Team 
-                4 - Choose Random Pokemon Team
-                5 - show current team 
-                6 - show team analysis
-                7 - save team to poketeams.csv
-                8 - clear chosen team
-                9 - filter team or all Pokemon by type
-                10 - automated team analyzer
-                11 or q - quit ''') # Added the quit option to display.
+                1 - List all pokemon.
+                2 - List individual pokemon.
+                3 - Choose six pokemon team. 
+                4 - Choose random pokemon team.
+                5 - Show current team. 
+                6 - Show team analysis.
+                7 - Save team to poketeams.csv.
+                8 - Clear chosen team.
+                9 - Filter team or all pokemon by type.
+                10 - Run the automated team analyzer.
+                11 - Or q to quit. ''')
                 
         
     elif selection == "1" : 
