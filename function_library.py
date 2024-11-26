@@ -1,5 +1,6 @@
+#Importing all nececary libraries.
 import re
-import sys # Importing the sys module to use sys.exit()
+import sys
 import time
 import csv
 import json
@@ -8,23 +9,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 import argparse
 
+# Creating global variables and 
 global team
-global user_path
-global data
 
-
+# Leverages the read_file function 
+# to list the names of all pokémon.
 def list_all_pokemon():
     data = read_file(user_path)
     if data:
         for pokemon in data : 
             print(pokemon['name'])
 
+# Leverages the read_file and individual_entry functions
+# to list all attributes of a given pokémon by name.
 def show_pokemon_stats_by_search():
     data = read_file(user_path)
     if data:
         name = input("Enter Pokemon's name: ")
         individual_entry(data, name)
 
+# Creates a DictReader object (reader) and a dictionary object (pokemon)
+# and uses the reader to fill the data list with each line as a pokemon
+# from the source data file.
 def read_file(user_path):
     #code to read file 
     while True:        
@@ -56,6 +62,7 @@ def read_file(user_path):
                 print("Incorrect file type. File must be a csv or json file.")
         except Exception:
             print(f"Error reading the file: {Exception}. Please try again.")
+      
       
 def choose_pokemon_team_by_name():
     global team
