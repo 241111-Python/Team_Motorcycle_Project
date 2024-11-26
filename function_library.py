@@ -12,6 +12,8 @@ parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
 parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
 args = parser.parse_args()
 
+global team
+
 if args.file:
         user_path = args.file
 else:

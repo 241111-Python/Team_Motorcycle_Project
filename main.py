@@ -7,16 +7,14 @@ https://betterdatascience.com/radar-charts-matplotlib-plotly/
 
 import sys # Importing the sys module to use sys.exit()
 import time
-import csv
-import json
-import random
+# import csv
+# import json
+# import random
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
 import function_library as lib
 
-team = ()
-team = []
 
 run = True
 
@@ -33,7 +31,8 @@ while(run) :
 
     
     data = lib.read_file(user_path)
-    print("press h for list of options ")
+    print("""---------------------------------------------
+          press h for list of options """)
     selection = input("Enter selection: ")
     if selection == 'h' : 
         print(''' list of options: 
@@ -62,12 +61,12 @@ while(run) :
     elif selection == "3" : 
         # choose pokemon team by name 
         # team = lib.choose_pokemon_team_by_name()
-        team = lib.pokemon_team()
+        lib.team = lib.pokemon_team()
             
 
     elif selection == "4" : 
         # generate random pokemon team
-        team = lib.generate_random_pokemon_team()
+        lib.team = lib.generate_random_pokemon_team()
         
 
     elif selection == "5" :
