@@ -46,12 +46,10 @@ while(run) :
         # Allows you to choose pokémon team by name and persist it.
         lib.team = lib.pokemon_team()
             
-
     elif selection == "4" : 
         # Generates a random pokemon team.
         lib.team = lib.generate_random_pokemon_team()
         
-
     elif selection == "5" :
         # Shows the current stored team.
         lib.show_current_team()
@@ -64,12 +62,10 @@ while(run) :
         # Saves current team to csv file.
        lib.save_team('all_CSVs/poketeams.csv')
 
-
     elif selection == '8':
         # Clears the current stored team.
         print("chosen team cleared")
         lib.team = []
-
 
     elif selection == "9":
     # Filters pokémon by type
@@ -78,7 +74,6 @@ while(run) :
     elif selection == '10' : 
         # Auto Stat Analyzer
         lib.autorun_stat_analyzer_with_random_team()
-
 
     elif selection == '11' or selection == 'q' : 
         # quit program 
