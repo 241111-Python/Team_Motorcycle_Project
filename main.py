@@ -20,60 +20,59 @@ while(run) :
     selection = input("Enter selection: ")
     if selection == 'h' : 
         print(''' list of options: 
-                1 - List all pokemon.
-                2 - List individual pokemon.
+                1 - List all pokémon.
+                2 - List individual pokémon.
                 3 - Choose six pokemon team. 
-                4 - Choose random pokemon team.
+                4 - Choose random pokémon team.
                 5 - Show current team. 
                 6 - Show team analysis.
-                7 - Save team to poketeams.csv.
+                7 - Save team to pokéteams.csv.
                 8 - Clear chosen team.
-                9 - Filter team or all pokemon by type.
+                9 - Filter team or all pokémon by type.
                 10 - Run the automated team analyzer.
                 11 - Or q to quit. ''')
                 
         
     elif selection == "1" : 
-        # list all pokemon 
+        # Lists all pokémon names by pokedex #.
         lib.list_all_pokemon()
             
 
     elif selection == "2" :
-        # show pokemon stats by search 
+        # Shows individual pokémon stats by typing the pokémon name.
         lib.show_pokemon_stats_by_search()
 
     elif selection == "3" : 
-        # choose pokemon team by name 
-        # team = lib.choose_pokemon_team_by_name()
+        # Allows you to choose pokémon team by name and persist it.
         lib.team = lib.pokemon_team()
             
 
     elif selection == "4" : 
-        # generate random pokemon team
+        # Generates a random pokemon team.
         lib.team = lib.generate_random_pokemon_team()
         
 
     elif selection == "5" :
-        # show current team 
+        # Shows the current stored team.
         lib.show_current_team()
 
     elif selection == "6" : 
-        # team analysis with chart 
+        # Displays the team analysis with a radar chart.
         lib.analyze_team()
             
     elif selection == "7" : 
-        # save current or random team to csv file 
+        # Saves current team to csv file.
        lib.save_team()
 
 
     elif selection == '8':
-        # clear selected team 
+        # Clears the current stored team.
         print("chosen team cleared")
         lib.team = []
 
 
     elif selection == "9":
-    # Filter Pokémon by type
+    # Filters pokémon by type
        lib.type_filter(lib.data)
 
     elif selection == '10' : 
@@ -86,6 +85,7 @@ while(run) :
         print("quitting")
         run = False
         
-
-time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).
-sys.exit(0) # Command to quit the program from the sys library (on the sys object created when the program runs) and raises the SystemExit exception. The "0" indicates a successful termination (no errors).
+# Timer to wait two seconds before terminating the program 
+# with a successful exit code of 0.
+time.sleep(2)
+sys.exit(0)
