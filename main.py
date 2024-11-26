@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import argparse
 import function_library as lib
 
+team = []
 
 run = True
 
