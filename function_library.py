@@ -85,7 +85,8 @@ def generate_random_pokemon_team():
     else:
         print("Data Unavailable")
 
-def show_current_team(team):
+def show_current_team():
+    global team
     try:
         if team:
             for i, pokemon in enumerate(team,1):
@@ -93,7 +94,8 @@ def show_current_team(team):
     except(NameError):
         print("Team has not been chosen ")    
 
-def analyze_team(team): 
+def analyze_team(): 
+    global team
     try:
         if team: 
             averages = team_statanalyzer(team)
@@ -102,7 +104,8 @@ def analyze_team(team):
     except NameError:
         print("Team has not been chosen.")      
 
-def save_team(team):   
+def save_team():   
+    global team
     try:
         if team: 
             print("Saving to file poketeams.csv ")
@@ -194,7 +197,8 @@ def radar_chart(stats):
     plt.legend()
     plt.show()
 
-def type_filter(team, data):
+def type_filter(data):
+    global team
     if team:
         types = {t for p in team for t in p["types"] if t}  # Get all unique types
         print("Available Types:", ", ".join(types))
