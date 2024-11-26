@@ -8,16 +8,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import argparse
 
-parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
-parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
-args = parser.parse_args()
-
 global team
+global user_path
+global data
 
-if args.file:
-        user_path = args.file
-else:
-    user_path = "./all_CSVs/mainpoke/pokemon.csv"
 
 def list_all_pokemon():
     data = read_file(user_path)
@@ -113,16 +107,16 @@ def analyze_team():
         print("Team has not been chosen.")      
 
 def save_team():   
-    global team
     try:
         if team: 
-            print("Saving to file poketeams.csv ")
             with open('./all_CSVs/poketeams.csv', 'a', newline='') as teamfile : 
+                print("Saving to file poketeams.csv ")
                 fieldnames = ['name', 'types', 'hp', 'attack', 'defense', 
                                 'sp_attack', 'sp_defense', 'speed']
                 writer = csv.DictWriter(teamfile, fieldnames = fieldnames)
+                writer2 = csv.writer(teamfile)
+                writer2.writerow("")
                 writer.writeheader
-                writer.writerow({})
                 writer.writerows(team) 
 
         else:
@@ -180,12 +174,26 @@ def team_statanalyzer(team):
 
     # Calculate the average stats
     average_stats = {key: value / len(team) for key, value in stats.items()}
+    
+     # Define ratings
+    ratings = {}
+    for stat, avg in stats.items():
+        if avg <= 50:
+            ratings[stat] = "Poor"
+        elif 50 < avg <= 80:
+            ratings[stat] = "Mid"
+        else:
+            ratings[stat] = "Good"
+
 
     print("Average Stats Analysis:")
     for stat, avg in average_stats.items():
         print(f"{stat.capitalize()}: {avg:.2f}")
-    radar_chart(average_stats)
-    return average_stats
+    radar_chart(average_stats, ratings )
+    return average_stats, ratings
+
+
+
 
 def team_statanalyzer_for_autorun(team):
     stats = {
@@ -219,6 +227,8 @@ def radar_chart(stats):
     plt.plot(label_loc, values, label='Team Stats')
     plt.title('Team Stats Radar Chart', size=20, y=1.05)
     labels = plt.thetagrids(np.degrees(label_loc), labels=labels)
+    rating_text = "\n".join([f"{stat.capitalize()}: {rating}" for stat, rating in ratings.items()])
+    plt.figtext(0.5, 0.02, f"Ratings:\n{rating_text}", wrap=True, horizontalalignment="center", fontsize=12)
     plt.legend()
     plt.show()
 
@@ -290,3 +300,20 @@ def autorun_stat_analyzer_with_random_team():
             print("The average lowest stat = " + str(average_lowest_stat))
         else : 
             print("Invalid input. Type a number. ")
+
+parser = argparse.ArgumentParser(description="Get Pokémon data from a file.")
+parser.add_argument('--file', '-f', type=str, help="Path to the Pokémon data file. Defaults to './all_CSVs/mainpoke/pokemon.csv'.")
+parser.add_argument('--save_random_team', '-srt', action='store_true', help='generate random team, save team to file')
+args = parser.parse_args()
+
+if args.file:
+    user_path = args.file
+else:
+    user_path = "./all_CSVs/mainpoke/pokemon.csv"
+
+if args.save_random_team:
+    print("saving a random team to file...")
+    team = generate_random_pokemon_team()
+    save_team()
+    time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).
+    sys.exit(0) # Command to quit the program from the sys library (on the sys object created when the program runs) and raises the SystemExit exception. The "0" indicates a successful termination (no errors).
