@@ -7,6 +7,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
+from datetime import datetime 
 
 global team
 global user_path
@@ -119,8 +120,8 @@ def save_team(path):
                                 'sp_attack', 'sp_defense', 'speed']
                 writer = csv.DictWriter(teamfile, fieldnames = fieldnames)
                 writer2 = csv.writer(teamfile)
-                writer2.writerow("")
-                writer.writeheader
+                writer2.writerow([])
+                writer2.writerow([f"Saved on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"])
                 writer.writerows(team) 
 
         else:
@@ -196,9 +197,6 @@ def team_statanalyzer():
         print(f"{stat.capitalize()}: {avg:.2f}")
     radar_chart(average_stats, ratings )
     return average_stats, ratings
-
-
-
 
 def team_statanalyzer_for_autorun():
     global team
