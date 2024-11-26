@@ -118,6 +118,7 @@ Avalugg,"['Ice', '']",95,117,184,44,46,28
 VenusaurMega Venusaur,"['Grass', 'Poison']",80,100,123,122,120,80
 Goodra,"['Dragon', '']",90,100,70,110,150,80
 
+<<<<<<< HEAD
 Huntail,"['Water', '']",55,104,105,94,75,52
 Sylveon,"['Fairy', '']",95,65,65,110,130,60
 Ursaring,"['Normal', '']",90,130,75,75,75,55
@@ -215,3 +216,18 @@ Beartic,"['Ice', '']",95,110,80,70,80,50
 Kyurem,"['Dragon', 'Ice']",125,130,90,130,90,95
 Swalot,"['Poison', '']",100,73,83,73,83,55
 Rhydon,"['Ground', 'Rock']",105,130,120,45,45,40
+=======
+Chatot,"['Normal', 'Flying']",76,65,45,92,42,91
+Drowzee,"['Psychic', '']",60,48,45,43,90,42
+Arcanine,"['Fire', '']",90,110,80,100,80,95
+Samurott,"['Water', '']",95,100,85,108,70,70
+Uxie,"['Psychic', '']",75,75,130,75,130,95
+Spiritomb,"['Ghost', 'Dark']",50,92,108,92,108,35
+
+LandorusIncarnate Forme,"['Ground', 'Flying']",89,125,90,115,80,101
+Remoraid,"['Water', '']",35,65,35,65,35,65
+AudinoMega Audino,"['Normal', 'Fairy']",103,60,126,80,126,50
+Stoutland,"['Normal', '']",85,110,90,45,90,80
+Espurr,"['Psychic', '']",62,48,54,63,60,68
+Kadabra,"['Psychic', '']",40,35,30,120,70,105
+>>>>>>> 421b8d8 (Didn't change anything.)
