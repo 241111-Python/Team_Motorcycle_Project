@@ -83,7 +83,7 @@ def generate_random_pokemon_team():
     else:
         print("Data Unavailable")
 
-def show_current_team():
+def show_current_team(team):
     try:
         if team:
             for i, pokemon in enumerate(team,1):
@@ -91,7 +91,7 @@ def show_current_team():
     except(NameError):
         print("Team has not been chosen ")    
 
-def analyze_team(): 
+def analyze_team(team): 
     try:
         if team: 
             averages = team_statanalyzer(team)
@@ -100,7 +100,7 @@ def analyze_team():
     except NameError:
         print("Team has not been chosen.")      
 
-def save_team():   
+def save_team(team):   
     try:
         if team: 
             print("Saving to file poketeams.csv ")
@@ -191,7 +191,36 @@ def radar_chart(stats):
     labels = plt.thetagrids(np.degrees(label_loc), labels=labels)
     plt.legend()
     plt.show()
-   
+
+def type_filter(team, data):
+    if team:
+        types = {t for p in team for t in p["types"] if t}  # Get all unique types
+        print("Available Types:", ", ".join(types))
+        type_filter = input("Enter the type to filter by: ").capitalize()
+        filtered_data = [p for p in team if type_filter in p["types"]]
+        if filtered_data:
+            print(f"\nPokémon with type '{type_filter}':")
+            for i, pokemon in enumerate(filtered_data, 1):
+                print(f"{i}. {pokemon['name']} - Types: {', '.join(pokemon['types'])}")
+        else:
+            print(f"No Pokémon found with type '{type_filter}'.")
+            return ""
+    else:
+        print("Team not chosen default to all entry sorting")
+        if data:
+            types = {t for p in data for t in p["types"] if t}  # Get all unique types
+            print("Available Types:", ", ".join(types))
+            type_filter = input("Enter the type to filter by: ").capitalize()
+            filtered_data = [p for p in data if type_filter in p["types"]]
+            if filtered_data:
+                print(f"\nPokémon with type '{type_filter}':")
+                for i, pokemon in enumerate(filtered_data, 1):
+                    print(f"{i}. {pokemon['name']} - Types: {', '.join(pokemon['types'])}")
+            else:
+                print(f"No Pokémon found with type '{type_filter}'.")
+                return ""
+
+        
 
 def autorun_stat_analyzer_with_random_team():
     data = read_file(user_path)

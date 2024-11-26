@@ -44,8 +44,10 @@ while(run) :
                 5 - show current team 
                 6 - show team analysis
                 7 - save team to poketeams.csv
-                8 - quit 
-                9 - automated team analyzer''') # Added the quit option to display.
+                8 - clear chosen team
+                9 - filter team or all Pokemon by type
+                10 - automated team analyzer
+                11 or q - quit ''') # Added the quit option to display.
                 
         
     elif selection == "1" : 
@@ -70,25 +72,39 @@ while(run) :
 
     elif selection == "5" :
         # show current team 
-        lib.show_current_team()
+        lib.show_current_team(team)
 
     elif selection == "6" : 
         # team analysis with chart 
-        lib.analyze_team()
+        lib.analyze_team(team)
             
     elif selection == "7" : 
         # save current or random team to csv file 
-       lib.save_team()
+       lib.save_team(team)
 
 
-    elif selection == '8' or selection == 'q' : 
+    elif selection == '8':
+        # clear selected team 
+        print("chosen team cleared")
+        team = []
+
+
+    elif selection == "9":
+    # Filter Pokémon by type
+       lib.type_filter(team, data)
+
+    elif selection == '10' : 
+        # quit program 
+        lib.autorun_stat_analyzer_with_random_team()
+
+
+    elif selection == '11' or selection == 'q' : 
         # quit program 
         print("quitting")
         run = False
 
-    elif selection == '9' : 
-        # quit program 
-        lib.autorun_stat_analyzer_with_random_team()
+     
+   
         
 
 time.sleep(2) # Command to wait two seconds before executing the next command (in this case, exit).
