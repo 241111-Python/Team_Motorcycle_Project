@@ -1,5 +1,6 @@
+#Importing all nececary libraries.
 import re
-import sys # Importing the sys module to use sys.exit()
+import sys
 import time
 import csv
 import json
@@ -9,23 +10,32 @@ import matplotlib.pyplot as plt
 import argparse
 from datetime import datetime 
 
+# Creating global variables and 
 global team
-global user_path
-global data
 
-
+# Leverages the read_file function 
+# to list the names of all pokémon.
+# (Used as option 1.)
 def list_all_pokemon():
     data = read_file(user_path)
     if data:
         for pokemon in data : 
             print(pokemon['name'])
 
+# Leverages the read_file and individual_entry functions
+# to list all attributes of a given pokémon by name.
+# (Used as option 2.)
 def show_pokemon_stats_by_search():
     data = read_file(user_path)
     if data:
         name = input("Enter Pokemon's name: ")
         individual_entry(data, name)
 
+# Creates a DictReader object (reader) and a dictionary object (pokemon)
+# and uses the reader to fill the data list with each line as a pokemon
+# from the source data file.
+# (Not directly referenced in main.)
+# (Used in many functions.)
 def read_file(user_path):
     #code to read file 
     while True:        
@@ -44,7 +54,6 @@ def read_file(user_path):
                         "sp_attack": int(row["Sp. Atk"]),
                         "sp_defense": int(row["Sp. Def"]),
                         "speed": int(row["Speed"])
-                            
                     }
                     data.append(pokemon)
                 return data
@@ -57,18 +66,12 @@ def read_file(user_path):
                 print("Incorrect file type. File must be a csv or json file.")
         except Exception:
             print(f"Error reading the file: {Exception}. Please try again.")
-      
-def choose_pokemon_team_by_name():
-    global team
-    data = read_file(user_path)
-    if data:
-        team = pokemon_team(data)
-        print("\nYour Chosen Pokemon Team:")
-        for i, pokemon in enumerate(team,1):
-            print(f"{i}. {pokemon['name']}")
-        else:
-            print("Data Unavailable")
 
+# Leverages the read_file and random_team functions 
+# to choose six pokemon at random,
+# persist them to the team list,
+# and print the six pokemon names.
+# (Used as option 4.)
 def generate_random_pokemon_team():
     global team
     data = read_file(user_path)
@@ -78,20 +81,25 @@ def generate_random_pokemon_team():
         for i, pokemon in enumerate(team,1):
             print(f"{i}. {pokemon['name']}")
         return team
-
     else:
         print("Data Unavailable")
 
+# Leverages the read_file and random_team functions 
+# to choose six pokemon at random
+# and output the team as a list.
+# (Not directly referenced in main.)
+# (Used in autorun_stat_analyzer_with_random_team function.)
 def generate_random_pokemon_team_for_autorun():
     global team
     data = read_file(user_path)
     if data:
         team = random_team(data)
         return team
-
     else:
         print("Data Unavailable")
 
+# Displays the current stored team.
+# (Used as option 5.)
 def show_current_team():
     global team
     try:
@@ -101,6 +109,9 @@ def show_current_team():
     except(NameError):
         print("Team has not been chosen ")    
 
+# Leverages the team_statanalyzer to run and display analysys
+#  on stored team's stats.
+# (Used as option 6.)
 def analyze_team(): 
     global team
     try:
@@ -111,7 +122,8 @@ def analyze_team():
     except NameError:
         print("Team has not been chosen.")      
 
-def save_team(path):   
+
+def save_team():   
     try:
         if team: 
             with open(path, 'a', newline='') as teamfile : 
