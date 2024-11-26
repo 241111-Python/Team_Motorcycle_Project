@@ -172,14 +172,28 @@ def team_statanalyzer(team):
 
     # Calculate the average stats
     average_stats = {key: value / len(team) for key, value in stats.items()}
+    
+     # Define ratings
+    ratings = {}
+    for stat, avg in stats.items():
+        if avg <= 50:
+            ratings[stat] = "Poor"
+        elif 50 < avg <= 80:
+            ratings[stat] = "Mid"
+        else:
+            ratings[stat] = "Good"
+
 
     print("Average Stats Analysis:")
     for stat, avg in average_stats.items():
         print(f"{stat.capitalize()}: {avg:.2f}")
-    radar_chart(average_stats)
-    return average_stats
+    radar_chart(average_stats, ratings )
+    return average_stats, ratings
 
-def radar_chart(stats):
+
+
+
+def radar_chart(stats,ratings):
     labels = list(stats.keys())
     values = list(stats.values())
     
@@ -194,6 +208,8 @@ def radar_chart(stats):
     plt.plot(label_loc, values, label='Team Stats')
     plt.title('Team Stats Radar Chart', size=20, y=1.05)
     labels = plt.thetagrids(np.degrees(label_loc), labels=labels)
+    rating_text = "\n".join([f"{stat.capitalize()}: {rating}" for stat, rating in ratings.items()])
+    plt.figtext(0.5, 0.02, f"Ratings:\n{rating_text}", wrap=True, horizontalalignment="center", fontsize=12)
     plt.legend()
     plt.show()
 
