@@ -85,8 +85,16 @@ def generate_random_pokemon_team():
     else:
         print("Data Unavailable")
 
-def show_current_team():
-    global team
+def generate_random_pokemon_team_for_autorun():
+    data = read_file(user_path)
+    if data:
+        team = random_team(data)
+        return team
+
+    else:
+        print("Data Unavailable")
+
+def show_current_team(team):
     try:
         if team:
             for i, pokemon in enumerate(team,1):
@@ -179,6 +187,23 @@ def team_statanalyzer(team):
     radar_chart(average_stats)
     return average_stats
 
+def team_statanalyzer_for_autorun(team):
+    stats = {
+        "hp": 0,
+        "attack": 0,
+        "defense": 0,
+        "sp_attack": 0,
+        "sp_defense": 0,
+        "speed": 0,
+    }
+
+    for pokemon in team:
+        for key in stats.keys():
+            stats[key] += pokemon.get(key, 0)  
+    # Calculate the average stats
+    average_stats = {key: value / len(team) for key, value in stats.items()}
+    return average_stats
+
 def radar_chart(stats):
     labels = list(stats.keys())
     values = list(stats.values())
@@ -231,25 +256,37 @@ def type_filter(data):
 def autorun_stat_analyzer_with_random_team():
     data = read_file(user_path)
     run = True
-    regex_to_match = r"0-9"
+    regex_to_match = r"[0-9]"
     while(run):
-        iterations = input("How many iterations would you like to run? ")
-        if re.match(regex_to_match, iterations):
-            print("running stats on " + iterations + " iterations.")
-
-            stats_for_all_runs = {}
+        
+        iterations_str = input("How many iterations would you like to run? ")
+        
+        if re.match(regex_to_match, iterations_str):
+            print("running stats on " + iterations_str + " iterations.")
+            iterations = int(iterations_str)
+            max_stats_for_all_runs = {}
+            min_stats_for_all_runs = {}
             for i in range(iterations):
-                random_team = random_team(data)
-                analyzer_results = team_statanalyzer(random_team)
-                greatest_stat = max(analyzer_results)
-                least_stat = min(analyzer_results)
-                stats_for_all_runs.append(greatest_stat, least_stat)
+                random_team = generate_random_pokemon_team_for_autorun()
+                analyzer_results = team_statanalyzer_for_autorun(random_team)
+                max_key = max(analyzer_results, key=analyzer_results.get)
+                greatest_stat = analyzer_results[max_key]
+                min_key = min(analyzer_results, key=analyzer_results.get)
+                least_stat = analyzer_results[min_key]
+                max_stats_for_all_runs[i] = greatest_stat
+                min_stats_for_all_runs[i] = least_stat
                 
                 # on each run store minimum and maximum stat and names of.
                 # On end of iterations output the minimum and maximum stats for each stat.
                 
             run = False
-
-            print(stats_for_all_runs)
+            highest_overall_stat = max(max_stats_for_all_runs.values())
+            lowest_overall_stat = max(min_stats_for_all_runs.values())
+            average_highest_stat=(sum(max_stats_for_all_runs.values()) // iterations)
+            average_lowest_stat=(sum(min_stats_for_all_runs.values()) // iterations)
+            print("The overall highest stat = " + str(highest_overall_stat))
+            print("The overall lowest stat = " + str(lowest_overall_stat))
+            print("The average highest stat = " + str(average_highest_stat))
+            print("The average lowest stat = " + str(average_lowest_stat))
         else : 
             print("Invalid input. Type a number. ")

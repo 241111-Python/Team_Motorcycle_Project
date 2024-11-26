@@ -94,7 +94,7 @@ while(run) :
        lib.type_filter( data)
 
     elif selection == '10' : 
-        # quit program 
+        # Auto Stat Analyzer
         lib.autorun_stat_analyzer_with_random_team()
 
 
