@@ -123,7 +123,7 @@ def analyze_team():
         print("Team has not been chosen.")      
 
 
-def save_team():   
+def save_team(path):   
     try:
         if team: 
             with open(path, 'a', newline='') as teamfile : 
