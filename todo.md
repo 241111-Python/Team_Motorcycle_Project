@@ -3,7 +3,7 @@
 - generates a random team of six pokemon and displays their names to the user in a list.
 
 ## 2 Manual team generator
-- Allows the user to generate a team of six pokemon by typing the names and displays their names to the user in a list.
+- Allows the user to curate a team of six pokemon by typing the names and displays their names to the user in a list.
 
 ## 3 Team stats analyzer
 - Takes input from the user (which team of six pokemon they would like analyzed) and pulls the stats (HP, attack, defense, SP attack, SP defense, and speed) for each.
