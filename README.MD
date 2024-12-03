@@ -1,21 +1,21 @@
 # Program description #
-Pokémon Team Builder, Analyzer, and Cron Automation
-This Python program is a command-line tool that enables users to create, manage, and analyze custom Pokémon teams, with added functionality for automating tasks using cron jobs. The tool integrates file handling, data visualization, and user interaction to provide a comprehensive experience for Pokémon enthusiasts. This project is ideal for Pokémon enthusiasts, competitive players looking to optimize their teams, or anyone seeking a mix of gaming fun and data-driven automation.
+- Pokémon Team Builder, Analyzer, and Cron Automation
+This Python program is a command-line tool that enables users to create, manage, and analyze custom Pokémon teams, with added functionality for automating tasks using cron jobs. The tool integrates file handling, data visualization, and user interaction to provide a comprehensive experience for Pokémon enthusiasts. This project is ideal for Pokémon enthusiasts, competitive players looking to optimize their teams, or anyone seeking a mix of gaming fun and data-driven automation. 
 
 
 # Functionality #
 
-All program functionality below.
+- All program functionality below.
 
 
 ## Function #1: List all pokemon
 
-Lists the names of all pokemon contained in the source file with no user input required.
+- Lists the names of all pokemon contained in the source file with no user input required.
 
 
 ## Function #2: List individual pokemon by name
 
-Takes a pokemon name as input and lists the name, type(s), and stats of the pokemon.
+- Takes a pokemon name as input and lists the name, type(s), and stats of the pokemon.
 
 
 ## Function #3: Choose six pokemon by name as current team
@@ -27,12 +27,40 @@ Takes a pokemon name as input and lists the name, type(s), and stats of the poke
 
 - Generates a random team of six pokemon with no user input required and displays their names to the user in a list.
 
+## Function #5: Show current team
 
-## 3 Team stats analyzer
-- Takes input from the user (which team of six pokemon they would like analyzed) and pulls the stats (HP, attack, defense, SP attack, SP defense, and speed) for each.
-- Then averages each stat over the six pokemon and stores those averages.
-- Then displays those averages in a radar chart format.
-- Also displays ratings (poor, mid, or good) for each stat average, listed below the radar chart in list format.
+- Shows the current team to the user with no input required.
+
+
+## Function #6: Show Team analysis
+
+- Displays average stats of current team on the command line and in a pop-up-radar chart for nifty visualization.
+
+## Function #7: Save team to poketeams.csv
+
+- Saves current team to poketeams.csv if it currently exists. Creates it if it does not. No user input required.
+
+
+## Function #8: Clear chosen team
+
+- Clears the current team from program memory, if a team currently exists.
+
+
+## Function #9: Filter team or all pokemon by type
+
+- If a team exists, filter it by avalable types. If no team exists, then filter all pokemon by desired type.
+
+
+## Function #10: Automated team analyzer
+
+- Takes input of how many iterations of random teams desired to be analyzed.
+- Then runs analysis of maximum and minimum team stats for a random team for as many iterations as specified.
+- Then prints the overall and average highest and lowest stats over all iterations of random teams generated.
+
+
+## Function #11:
+
+- Sionara.
 
 
 # Functionality to add (future updates)
